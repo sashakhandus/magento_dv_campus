@@ -143,6 +143,12 @@
     Options +FollowSymLinks
     RewriteEngine on
 
+    SetEnvIf Host .*sasha-khandus.local.* MAGE_RUN_CODE=base
+    SetEnvIf Host .*sasha-khandus.local.* MAGE_RUN_TYPE=website
+
+    SetEnvIf Host .*sasha-khandus-add.local.* MAGE_RUN_CODE=additional_website
+    SetEnvIf Host .*sasha-khandus-add.local.* MAGE_RUN_TYPE=website
+
 ############################################
 ## you can put here your magento root folder
 ## path relative to web root

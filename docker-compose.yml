@@ -1,5 +1,5 @@
 # SSL certificates for development
-# $ mkcert sasha-khandus.local www.sasha-khandus.local
+# $ mkcert sasha-khandus.local www.sasha-khandus.local sasha-khandus-add.local www.sasha-khandus-add.local
 #
 # DEVELOPMENT:
 # $ docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d
@@ -24,15 +24,15 @@ services:
     restart: always
     labels:
       # - traefik.enable=false
-      - traefik.http.frontend.rule=Host:sasha-khandus.local,www.sasha-khandus.local
+      - traefik.http.frontend.rule=Host:sasha-khandus.local,www.sasha-khandus.local,sasha-khandus-add.local,www.sasha-khandus-add.local
       - traefik.http.frontend.entryPoints=http
-      - traefik.https.frontend.rule=Host:sasha-khandus.local,www.sasha-khandus.local
+      - traefik.https.frontend.rule=Host:sasha-khandus.local,www.sasha-khandus.local,sasha-khandus-add.local,www.sasha-khandus-add.local
       - traefik.https.frontend.entryPoints=https
       - traefik.https.protocol=https
       - traefik.https.port=443
     # Must add extra_hosts to be written to /etc/hosts - otherwise containerized application can not curl itself
     extra_hosts:
-      - "sasha-khandus.local www.sasha-khandus.local:127.0.0.1"
+      - "sasha-khandus.local www.sasha-khandus.local sasha-khandus-add.local www.sasha-khandus-add.local:127.0.0.1"
 #    links:
 #      - memcached
     external_links:
