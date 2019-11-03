@@ -1,4 +1,4 @@
-FROM php:7.2-apache-stretch
+FROM php:7.3-apache-stretch
 
 ARG DEVELOPER_MODE
 
@@ -85,9 +85,9 @@ RUN a2enmod rewrite proxy proxy_http ssl headers expires
 RUN curl -k -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Must use the same UID/GUI as on the local system for the shared files to be editable on both systems
-#RUN if [ "$DEVELOPER_MODE" = 1 ] ; then \
-#       groupadd -g 1000 docker && useradd -u 1000 -g docker -m docker ; \
-#       su docker -c "composer global require hirak/prestissimo" ; \
-#   else \
-#       composer global require hirak/prestissimo ; \
-#   fi ;
+RUN if [ "$DEVELOPER_MODE" = 1 ] ; then \
+        groupadd -g 1000 docker && useradd -u 1000 -g docker -m docker ; \
+        su docker -c "composer global require hirak/prestissimo" ; \
+    else \
+        composer global require hirak/prestissimo ; \
+    fi ;
