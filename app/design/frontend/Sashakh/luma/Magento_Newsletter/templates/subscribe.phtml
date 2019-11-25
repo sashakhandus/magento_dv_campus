@@ -9,7 +9,7 @@
 <div class="block newsletter">
     <div class="title"><strong><?= $block->escapeHtml(__('Newsletter')) ?></strong></div>
     <div class="content">
-        <p class="subscribe-text">Subscribe now to get special promo!</p>
+        <p class="subscribe-text"><?= $block->escapeHtml(__('Subscribe now to get special promo!')) ?></p>
         <form class="form subscribe"
               novalidate
               action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
