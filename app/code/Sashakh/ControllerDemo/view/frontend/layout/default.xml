@@ -7,7 +7,8 @@
             <block class="Magento\Framework\View\Element\Html\Link\Current" name="sashakh-customer-link">
                 <arguments>
                     <argument name="label" xsi:type="string" translate="true">Sasha Khandus Links</argument>
-                    <argument name="path" xsi:type="string">sashakh-controller-demo/forward_bar/htmlResponse</argument>
+                    <!--<argument name="path" xsi:type="string">sashakh-controller-demo/forward/htmlResponse</argument>-->
+                    <argument name="path" xsi:type="string">sashakh-controller-demo/forward/forwarddemo</argument>
                 </arguments>
             </block>
         </referenceBlock>

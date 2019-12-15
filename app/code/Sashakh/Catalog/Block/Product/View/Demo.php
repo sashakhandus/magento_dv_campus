@@ -9,7 +9,6 @@ namespace Sashakh\Catalog\Block\Product\View;
  *
  * @method string getStringVariable()
  */
-
 class Demo extends \Magento\Framework\View\Element\Template
 {
 

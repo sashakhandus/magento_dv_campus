@@ -4,7 +4,7 @@ return [
         'frontName' => 'admin'
     ],
     'crypt' => [
-        'key' => '2b5b14cccb5a13f0f6fc22f79484a222'
+        'key' => 'e533198d784191f5db234850e5bdbca9'
     ],
     'db' => [
         'table_prefix' => 'm2_',
@@ -44,12 +44,12 @@ return [
     'lock' => [
         'provider' => 'db',
         'config' => [
-            'prefix' => null
+            'prefix' => NULL
         ]
     ],
     'cache_types' => [
         'config' => 1,
-        'layout' => 0,
+        'layout' => 1,
         'block_html' => 0,
         'collections' => 1,
         'reflection' => 1,
@@ -65,10 +65,6 @@ return [
         'vertex' => 1
     ],
     'install' => [
-        'date' => 'Mon, 14 Oct 2019 19:39:39 +0000'
-    ],
-    'downloadable_domains' => [
-        'sasha-khandus.local',
-        'sasha-khandus-add.local'
+        'date' => 'Mon, 07 Oct 2019 20:30:31 +0000'
     ]
 ];

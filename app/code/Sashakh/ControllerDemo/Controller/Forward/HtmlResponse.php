@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Sashakh\ControllerDemo\Controller\Forward\Bar;
+namespace Sashakh\ControllerDemo\Controller\Forward;
 
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\Page;
@@ -12,7 +12,7 @@ class HtmlResponse extends \Magento\Framework\App\Action\Action implements
 
     /**
      * @inheritDoc
-     * https://sasha-khandus.local/sashakh-controller-demo/forward_bar/htmlResponse
+     * https://sasha-khandus.local/sashakh-controller-demo/forward/htmlResponse
      */
     public function execute()
     {
