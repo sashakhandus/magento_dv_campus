@@ -244,6 +244,7 @@ return [
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
         'Sashakh_Catalog' => 1,
+        'Sashakh_Chat' => 1,
         'Sashakh_Cms' => 1,
         'Sashakh_ControllerDemo' => 1,
         'Temando_Shipping' => 1,
