@@ -9,10 +9,14 @@
                        name="sashakh.chat.button"
                        template="Sashakh_Chat::open_button.phtml"
                 />
-                <!--<block class="Magento\Framework\View\Element\Template"
+                <block class="Magento\Framework\View\Element\Template"
                        name="sashakh.chat.chat"
-                       template="Sashakh_Chat::chat.phtml"
-                />-->
+                       template="Sashakh_Chat::sidebar.phtml"
+                />
+                <block class="Magento\Framework\View\Element\Template"
+                       name="sashakh.chat.form"
+                       template="Sashakh_Chat::form.phtml"
+                />
             </container>
         </referenceBlock>
     </body>
