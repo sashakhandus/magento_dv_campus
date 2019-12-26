@@ -3,15 +3,18 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd"
 >
     <body>
+        <referenceContainer name="header-wrapper">
+                <block class="Magento\Framework\View\Element\Template"
+                       name="sashakh.chat.button.mobile"
+                       template="Sashakh_Chat::open_button_mobile.phtml"
+                       before="-"
+                />
+        </referenceContainer>
         <referenceBlock name="before.body.end">
             <container name="sashakh.chat">
                 <block class="Magento\Framework\View\Element\Template"
                        name="sashakh.chat.button"
                        template="Sashakh_Chat::open_button.phtml"
-                />
-                <block class="Magento\Framework\View\Element\Template"
-                       name="sashakh.chat.chat"
-                       template="Sashakh_Chat::sidebar.phtml"
                 />
                 <block class="Magento\Framework\View\Element\Template"
                        name="sashakh.chat.form"
