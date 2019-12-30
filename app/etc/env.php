@@ -44,13 +44,13 @@ return [
     'lock' => [
         'provider' => 'db',
         'config' => [
-            'prefix' => NULL
+            'prefix' => ''
         ]
     ],
     'cache_types' => [
         'config' => 1,
         'layout' => 1,
-        'block_html' => 0,
+        'block_html' => 1,
         'collections' => 1,
         'reflection' => 1,
         'db_ddl' => 1,
@@ -59,12 +59,13 @@ return [
         'customer_notification' => 1,
         'config_integration' => 1,
         'config_integration_api' => 1,
-        'full_page' => 0,
+        'full_page' => 1,
         'config_webservice' => 1,
         'translate' => 1,
-        'vertex' => 1
+        'vertex' => 1,
+        'google_product' => 1
     ],
     'install' => [
-        'date' => 'Mon, 07 Oct 2019 20:30:31 +0000'
+        'date' => 'Mon, 30 Dec 2019 21:52:37 +0000'
     ]
 ];

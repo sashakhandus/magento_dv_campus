@@ -14,12 +14,25 @@
                 <span><?= $block->escapeHtml(__('Chat')) ?></span>
             </legend>
             <br/>
+            <div class="field name required">
+                <label class="label" for="name">
+                    <span><?= $block->escapeHtml(__('Name')) ?></span>
+                </label>
+                <div class="control">
+                    <input name="name"
+                           id="name"
+                           title="<?= $block->escapeHtmlAttr(__('Name')) ?>"
+                           class="input-text" type="text"
+                           data-validate="{required:true}"
+                    />
+                </div>
+            </div>
             <div class="messages-list"></div>
             <div class="field note no-label">
                 <?= $block->escapeHtml(__('Your messages')) ?>
             </div>
-            <div class="field name required">
-                <label class="label" for="name">
+            <div class="field message required">
+                <label class="label" for="textarea">
                     <span><?= $block->escapeHtml(__('Enter message')) ?></span>
                 </label>
                 <div class="control">
