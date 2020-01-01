@@ -56,6 +56,21 @@
     padding-bottom: @modal-popup__padding;
   }
 
+  .messages-list {
+    display: none;
+    background: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c2c2c2;
+    border-radius: 1px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    padding: 5px 9px;
+    vertical-align: baseline;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {

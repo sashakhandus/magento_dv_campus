@@ -69,11 +69,18 @@ define([
                 success: function (response) {
                     $('body').trigger('processStop');
                     // @TODO: show new preferences
-                    console.log('success')
-                    alert({
+
+
+                    $('.messages-list').append(formData.get('name'));
+                    $('.messages-list').append(formData.get('message'));
+                    $('.messages-list').show();
+
+                   /*alert({
                         title: $.mage.__('Success'),
                         content: $.mage.__(response.message)
-                    });
+                    });*/
+
+
                 },
 
                 /** @inheritdoc */
