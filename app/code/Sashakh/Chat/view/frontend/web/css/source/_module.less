@@ -54,6 +54,11 @@
 
   #sashakh-chat-form {
     padding-bottom: @modal-popup__padding;
+    max-width: 100%;
+
+    fieldset {
+      max-width: 100%;
+    }
   }
 
   .messages-list {
@@ -67,8 +72,65 @@
     line-height: 1.428571429;
     padding: 5px 9px;
     vertical-align: baseline;
-    width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    .user-question {
+      text-align: right;
+      width: 60%;
+      background: @color-sky-blue1;
+      color: @color-gray19;
+      margin-left: auto;
+      margin-right: 0;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -o-pre-wrap;
+      overflow-wrap: break-word;
+    }
+
+    .user-name {
+      border-top-left-radius: 20px;
+      padding-top: 5px;
+      margin-bottom: 0;
+    }
+
+    .user-message {
+      border-bottom-left-radius: 20px;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .admin-question {
+      text-align: left;
+      width: 60%;
+      background: @color-yellow-light2;
+      color: @color-gray19;
+      margin-left: 0;
+      margin-right: auto;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -o-pre-wrap;
+      overflow-wrap: break-word;
+    }
+
+    .admin-name {
+      border-top-right-radius: 20px;
+      padding-top: 5px;
+      margin-bottom: 0;
+    }
+
+    .admin-message {
+      border-bottom-right-radius: 20px;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
   }
 
 }
