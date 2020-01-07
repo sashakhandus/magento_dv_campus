@@ -92,10 +92,10 @@ define([
 
                     $("#sashakh-chat-form")[0].reset();
 
-                   /*alert({
+                   alert({
                         title: $.mage.__('Success'),
                         content: $.mage.__(response.message)
-                    });*/
+                    });
                 },
 
                 /** @inheritdoc */
