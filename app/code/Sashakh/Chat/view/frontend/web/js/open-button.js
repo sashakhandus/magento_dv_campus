@@ -9,6 +9,8 @@ define([
     $.widget('sashakhChat.openButton', {
         options: {
             hideButton: true,
+            openButton: '#sashakh-chat-open-button',
+            destroyButton: '#sashakh-chat-destroy-button',
             chatList: '#sashakh-chat-list',
             form: '#sashakh-chat-form'
         },
@@ -17,25 +19,26 @@ define([
          * @private
          */
         _create: function () {
-            $(this.element).on('click.sashakh_chat', $.proxy(this.editChat, this));
+            $(this.options.openButton).on('click.sashakh_chat', $.proxy(this.openChat, this));
+            $(this.options.destroyButton).on('click.sashakh_chat', $.proxy(this.destroy, this));
         },
 
         /**
-         * jQuery(jQuery('.sashakh-chat-open-button').get(0)).data('sashakhChatOpenButton').destroy()
+         * jQuery(jQuery('.sashakh-chat-open-block').get(0)).data('sashakhChatOpenButton').destroy()
          * @private
          */
         _destroy: function () {
-            $(this.element).off('click.sashakh_chat');
-
+            $(this.options.openButton).off('click.sashakh_chat');
+            $(this.options.destroyButton).off('click.sashakh_chat');
         },
-
 
         /**
          * Open popup with the form to edit preferences
          */
-        editChat: function () {
+        openChat: function () {
             $(this.options.form).data('mage-modal').openModal();
-        }
+        },
+
     });
 
     return $.sashakhChat.openButton;

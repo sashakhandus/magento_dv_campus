@@ -1,61 +1,44 @@
 & when (@media-common = true) {
-  .sashakh-chat-open-button {
-       display: none;
-     }
 
-  .sashakh-chat-open-button-mobile {
-    display: block;
+  #sashakh-chat-block {
     margin-top: 10px;
     margin-left: 10px;
     display: inline-block;
     position: relative;
     float: right;
 
-    &:before {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-size: 28px;
-      line-height: 28px;
-      color: @color-gray46;
-      content: '\e620';
-      font-family: 'luma-icons';
-      margin: 0;
-      vertical-align: top;
-      display: inline-block;
-      font-weight: normal;
-      overflow: hidden;
-      speak: none;
-      text-align: center;
+    .sashakh-chat-destroy-button {
+      border: none;
+      background: transparent;
+      font-size: 20px;
+      padding: 0 5px;
+      line-height: 1.5;
+      box-shadow: none;
     }
 
-    &.active {
-     /* right: 30px;*/
-    }
-  }
-
-  #sashakh-chat-sidebar {
-    background-color: @color-white;
-    border: @border-width__base solid @border-color__base;
-    bottom: 30px;
-    display: block;
-    max-height: 400px;
-    padding: 30px;
-    position: fixed;
-    right: -360px;
-    transition-property: right;
-    transition-duration: .3s;
-    overflow-y: scroll;
-    width: 300px;
-
-    &.active {
-      right: 0;
+    .sashakh-chat-open-button {
+      &:before {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 28px;
+        line-height: 28px;
+        color: @color-gray46;
+        content: '\e620';
+        font-family: 'luma-icons';
+        margin: 0;
+        vertical-align: top;
+        display: inline-block;
+        font-weight: normal;
+        overflow: hidden;
+        speak: none;
+        text-align: center;
+      }
     }
   }
 
   #sashakh-chat-form {
     padding-bottom: @modal-popup__padding;
     max-width: 100%;
-
     fieldset {
       max-width: 100%;
     }
@@ -94,8 +77,13 @@
       overflow-wrap: break-word;
     }
 
-    .user-name {
+    .user-date {
       border-top-left-radius: 20px;
+      padding-top: 5px;
+      margin-bottom: 0;
+    }
+
+    .user-name {
       padding-top: 5px;
       margin-bottom: 0;
     }
@@ -120,10 +108,15 @@
       overflow-wrap: break-word;
     }
 
-    .admin-name {
+    .admin-date {
       border-top-right-radius: 20px;
       padding-top: 5px;
       margin-bottom: 0;
+    }
+
+    .admin-name {
+      margin-bottom: 0;
+      padding-top: 5px;
     }
 
     .admin-message {
@@ -136,38 +129,38 @@
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-  .sashakh-chat-open-button {
-    display: block;
+
+  #sashakh-chat-block {
+    display: flex;
+    align-items: center;
     bottom: 50px;
     position: fixed;
-    right: -62px;
-    transition-property: right;
-    transition-duration: .3s;
+    right: 30px;
     z-index: 10;
 
-    &:before {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      font-size: 60px;
-      line-height: 70px;
+    .sashakh-chat-destroy-button {
+      font-size: 30px;
       color: @theme__color__secondary;
-      content: '\e620';
-      font-family: 'luma-icons';
-      margin: 0;
-      vertical-align: top;
+    }
+
+    .sashakh-chat-open-button {
       display: inline-block;
-      font-weight: normal;
-      overflow: hidden;
-      speak: none;
-      text-align: center;
+      &:before {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 60px;
+        line-height: 70px;
+        color: @theme__color__secondary;
+        content: '\e620';
+        font-family: 'luma-icons';
+        margin: 0;
+        vertical-align: top;
+        display: inline-block;
+        font-weight: normal;
+        overflow: hidden;
+        speak: none;
+        text-align: center;
+      }
     }
-
-    &.active {
-      right: 30px;
-    }
-  }
-
-  .sashakh-chat-open-button-mobile {
-    display: none;
   }
 }

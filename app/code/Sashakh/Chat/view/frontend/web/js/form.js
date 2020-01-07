@@ -49,13 +49,18 @@ define([
          */
 
         appendMessage: function(name, message) {
+            var currentDate = new Date();
+            var dateTime = currentDate.toUTCString();
+
+            var userDate = $("<p class='user-question user-date'></p>").text(dateTime);
             var userName = $("<p class='user-question user-name'></p>").text(name);
             var userMessage = $("<p class='user-question user-message'></p>").text(message);
 
+            var adminDate = $("<p class='admin-question admin-date'></p>").text(dateTime);
             var adminName = $("<p class='admin-question admin-name'></p>").text('admin');
             var adminMessage = $("<p class='admin-question admin-message'></p>").text('admin message');
 
-            $('.messages-list').append(userName, userMessage, adminName, adminMessage);
+            $('.messages-list').append(userDate, userName, userMessage, adminDate, adminName, adminMessage);
 
             $('.messages-list').show();
         },

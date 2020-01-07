@@ -6,21 +6,13 @@
         <referenceContainer name="header-wrapper">
                 <block class="Magento\Framework\View\Element\Template"
                        name="sashakh.chat.button.mobile"
-                       template="Sashakh_Chat::open_button_mobile.phtml"
+                       template="Sashakh_Chat::open_button.phtml"
                        before="-"
                 />
+            <block class="Magento\Framework\View\Element\Template"
+                   name="sashakh.chat.form"
+                   template="Sashakh_Chat::form.phtml"
+            />
         </referenceContainer>
-        <referenceBlock name="before.body.end">
-            <container name="sashakh.chat">
-                <block class="Magento\Framework\View\Element\Template"
-                       name="sashakh.chat.button"
-                       template="Sashakh_Chat::open_button.phtml"
-                />
-                <block class="Magento\Framework\View\Element\Template"
-                       name="sashakh.chat.form"
-                       template="Sashakh_Chat::form.phtml"
-                />
-            </container>
-        </referenceBlock>
     </body>
 </page>
