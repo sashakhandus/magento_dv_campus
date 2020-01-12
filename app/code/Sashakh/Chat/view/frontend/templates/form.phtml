@@ -18,13 +18,13 @@
             <br/>
             <div class="field name required">
                 <label class="label" for="authorType">
-                    <span><?= $block->escapeHtml(__('Author type: 1 - admin, 2 - user.')) ?></span>
+                    <span><?= $block->escapeHtml(__('Author type: 1 - user, 2 - admin.')) ?></span>
                 </label>
                 <div class="control">
-                    <input name="authortype"
+                    <input name="authorType"
                            id="authorType"
                            title="<?= $block->escapeHtmlAttr(__('Author type:')) ?>"
-                           class="input-text" type="text"
+                           class="input-text" type="number"
                            data-validate="{required:true}"
                     />
                 </div>
@@ -34,7 +34,7 @@
                     <span><?= $block->escapeHtml(__('Author Name')) ?></span>
                 </label>
                 <div class="control">
-                    <input name="authorname"
+                    <input name="authorName"
                            id="authorName"
                            title="<?= $block->escapeHtmlAttr(__('Author Name')) ?>"
                            class="input-text" type="text"

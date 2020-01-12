@@ -44,23 +44,29 @@ define([
 
         /**
          *
+         * @param authorType
          * @param authorName
          * @param message
          */
-        appendMessage: function(authorName, message) {
+        appendMessage: function(authorType, authorName, message) {
             var currentDate = new Date();
             var dateTime = currentDate.toUTCString();
+            var userDate, userName, userMessage, adminDate, adminName, adminMessage;
 
-            var userDate = $("<p class='user-question user-date'></p>").text(dateTime);
-            var userName = $("<p class='user-question user-name'></p>").text(authorName);
-            var userMessage = $("<p class='user-question user-message'></p>").text(message);
+            if (authorType === '1') {
+                userDate = $("<p class='user-question user-date'></p>").text(dateTime);
+                userName = $("<p class='user-question user-name'></p>").text(authorName);
+                userMessage = $("<p class='user-question user-message'></p>").text(message);
 
-            var adminDate = $("<p class='admin-question admin-date'></p>").text(dateTime);
-            var adminName = $("<p class='admin-question admin-name'></p>").text('admin');
-            var adminMessage = $("<p class='admin-question admin-message'></p>").text('admin message');
+                $('.messages-list').append(userDate, userName, userMessage).show();
+            } else {
+                adminDate = $("<p class='admin-question admin-date'></p>").text(dateTime);
+                adminName = $("<p class='admin-question admin-name'></p>").text(authorName);
+                adminMessage = $("<p class='admin-question admin-message'></p>").text(message);
 
-            $('.messages-list').append(userDate, userName, userMessage, adminDate, adminName, adminMessage);
-            $('.messages-list').show();
+                $('.messages-list').append(adminDate, adminName, adminMessage).show();
+            }
+
         },
 
         /**
@@ -90,7 +96,7 @@ define([
                 success: function (response) {
                     $('body').trigger('processStop');
 
-                    this.appendMessage(formData.get('authorName'), formData.get('message'));
+                    this.appendMessage(formData.get('authorType'), formData.get('authorName'), formData.get('message'));
 
                     $("#sashakh-chat-form")[0].reset();
 
@@ -103,7 +109,6 @@ define([
                 /** @inheritdoc */
                 error: function () {
                     $('body').trigger('processStop');
-                    console.log('Error');
                     alert({
                         title: $.mage.__('Error'),
                         /*eslint max-len: ["error", { "ignoreStrings": true }]*/

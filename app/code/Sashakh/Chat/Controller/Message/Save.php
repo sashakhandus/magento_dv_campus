@@ -96,9 +96,3 @@ class Save extends \Magento\Framework\App\Action\Action implements
         return $response;
     }
 }
-
-function console_log( $data ){
-    echo '<script>';
-    echo 'console.log('. json_encode( $data ) .')';
-    echo '</script>';
-}
