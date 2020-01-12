@@ -115,5 +115,8 @@
         "enforceExistence": "exceptExports",
         "requireHyphenBeforeDescription": true,
         "requireParamTypes": true
-    }
+    },
+  "excludeFiles": [
+    "../../../../../../../../../app/code/Sashakh/Chat/view/frontend/web/js/form.js"
+  ]
 }

@@ -17,13 +17,26 @@
             <div class="messages-list"></div>
             <br/>
             <div class="field name required">
-                <label class="label" for="name">
-                    <span><?= $block->escapeHtml(__('Name')) ?></span>
+                <label class="label" for="authorType">
+                    <span><?= $block->escapeHtml(__('Author type: 1 - admin, 2 - user.')) ?></span>
                 </label>
                 <div class="control">
-                    <input name="name"
-                           id="name"
-                           title="<?= $block->escapeHtmlAttr(__('Name')) ?>"
+                    <input name="authortype"
+                           id="authorType"
+                           title="<?= $block->escapeHtmlAttr(__('Author type:')) ?>"
+                           class="input-text" type="text"
+                           data-validate="{required:true}"
+                    />
+                </div>
+            </div>
+            <div class="field name required">
+                <label class="label" for="authorName">
+                    <span><?= $block->escapeHtml(__('Author Name')) ?></span>
+                </label>
+                <div class="control">
+                    <input name="authorname"
+                           id="authorName"
+                           title="<?= $block->escapeHtmlAttr(__('Author Name')) ?>"
                            class="input-text" type="text"
                            data-validate="{required:true}"
                     />

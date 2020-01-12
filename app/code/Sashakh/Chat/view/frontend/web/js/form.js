@@ -44,16 +44,15 @@ define([
 
         /**
          *
-         * @param name
+         * @param authorName
          * @param message
          */
-
-        appendMessage: function(name, message) {
+        appendMessage: function(authorName, message) {
             var currentDate = new Date();
             var dateTime = currentDate.toUTCString();
 
             var userDate = $("<p class='user-question user-date'></p>").text(dateTime);
-            var userName = $("<p class='user-question user-name'></p>").text(name);
+            var userName = $("<p class='user-question user-name'></p>").text(authorName);
             var userMessage = $("<p class='user-question user-message'></p>").text(message);
 
             var adminDate = $("<p class='admin-question admin-date'></p>").text(dateTime);
@@ -61,7 +60,6 @@ define([
             var adminMessage = $("<p class='admin-question admin-message'></p>").text('admin message');
 
             $('.messages-list').append(userDate, userName, userMessage, adminDate, adminName, adminMessage);
-
             $('.messages-list').show();
         },
 
@@ -91,15 +89,14 @@ define([
                 /** @inheritdoc */
                 success: function (response) {
                     $('body').trigger('processStop');
-                    // @TODO: show new preferences
 
-                    this.appendMessage(formData.get('name'), formData.get('message'));
+                    this.appendMessage(formData.get('authorName'), formData.get('message'));
 
                     $("#sashakh-chat-form")[0].reset();
 
                    alert({
                         title: $.mage.__('Success'),
-                        content: $.mage.__(response.message)
+                        content: response.message
                     });
                 },
 
