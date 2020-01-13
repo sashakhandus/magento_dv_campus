@@ -4,6 +4,7 @@ namespace Sashakh\Chat\Controller\Message;
 
 use Sashakh\Chat\Model\Chat;
 use Sashakh\Chat\Model\ResourceModel\Chat\Collection as ChatCollection;
+use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json as JsonResult;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\DB\Transaction;
@@ -64,6 +65,9 @@ class Save extends \Magento\Framework\App\Action\Action implements
         /** @var Transaction $transaction */
         $transaction = $this->transactionFactory->create();
 
+        /** @var Http $request */
+        $request = $this->getRequest();
+
         // Every fail should be controlled
         try {
             $websiteId = (int) $this->storeManager->getWebsite()->getId();
@@ -77,9 +81,9 @@ class Save extends \Magento\Framework\App\Action\Action implements
             $chat = $this->chatFactory->create();
 
             $chat->setWebsiteId($websiteId)
-                ->setAuthorType($value)
-                ->setAuthorName($value)
-                ->setMessage($value);
+                ->setAuthorType($request->getParam('authorType'))
+                ->setAuthorName($request->getParam('authorName'))
+                ->setMessage($request->getParam('message'));
             $transaction->addObject($chat);
 
             $transaction->save();

@@ -7,7 +7,6 @@ use Magento\Framework\Exception\LocalizedException;
 
 /**
  * @method int getMessageId()
- * @method $this setMessageId(int $messageId)
  * @method int getAuthorType()
  * @method $this setAuthorType(int $authorType)
  * @method string getAuthorName()
@@ -16,6 +15,7 @@ use Magento\Framework\Exception\LocalizedException;
  * @method $this setMessage(string $message)
  * @method int getWebsiteId()
  * @method $this setWebsiteId(int $websiteId)
+ * * @method int getCreatedAt()
  */
 
 class Chat extends \Magento\Framework\Model\AbstractModel
