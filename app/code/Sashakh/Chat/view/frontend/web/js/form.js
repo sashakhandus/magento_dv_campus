@@ -59,7 +59,7 @@ define([
                 userMessage = $("<p class='user-question user-message'></p>").text(message);
 
                 $('.messages-list').append(userDate, userName, userMessage).show();
-            } else {
+            } else if (authorType === '2') {
                 adminDate = $("<p class='admin-question admin-date'></p>").text(dateTime);
                 adminName = $("<p class='admin-question admin-name'></p>").text(authorName);
                 adminMessage = $("<p class='admin-question admin-message'></p>").text(message);

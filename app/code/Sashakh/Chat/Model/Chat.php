@@ -15,7 +15,7 @@ use Magento\Framework\Exception\LocalizedException;
  * @method $this setMessage(string $message)
  * @method int getWebsiteId()
  * @method $this setWebsiteId(int $websiteId)
- * * @method int getCreatedAt()
+ * @method int getCreatedAt()
  */
 
 class Chat extends \Magento\Framework\Model\AbstractModel
@@ -76,7 +76,7 @@ class Chat extends \Magento\Framework\Model\AbstractModel
     public function validate(): void
     {
         if (!$this->getWebsiteId()) {
-            throw new LocalizedException(__('Can\'t save customer preferences: %s is not set.', 'website_id'));
+            throw new LocalizedException(__('Can\'t save message: %s is not set.', 'website_id'));
         }
     }
 }

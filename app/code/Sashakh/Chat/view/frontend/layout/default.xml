@@ -7,12 +7,16 @@
                 <block class="Magento\Framework\View\Element\Template"
                        name="sashakh.chat.button.mobile"
                        template="Sashakh_Chat::open_button.phtml"
-                       before="-"
-                />
+                       before="-">
+                </block>
             <block class="Magento\Framework\View\Element\Template"
                    name="sashakh.chat.form"
-                   template="Sashakh_Chat::form.phtml"
-            />
+                   template="Sashakh_Chat::form.phtml">
+                <block class="Sashakh\Chat\Block\Messages"
+                    name="message.list"
+                       template="Sashakh_Chat::message_list.phtml">
+                </block>
+            </block>
         </referenceContainer>
     </body>
 </page>

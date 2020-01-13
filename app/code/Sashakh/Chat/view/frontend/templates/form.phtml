@@ -14,7 +14,7 @@
                 <span><?= $block->escapeHtml(__('Chat')) ?></span>
             </legend>
             <br/>
-            <div class="messages-list"></div>
+            <?= $block->getChildHtml('message.list') ?>
             <br/>
             <div class="field name required">
                 <label class="label" for="authorType">

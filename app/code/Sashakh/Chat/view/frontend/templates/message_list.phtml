@@ -1,0 +1,12 @@
+<?php /** @var \Sashakh\Chat\Block\Messages $block */
+$allMessages = $block->getAllMessages();
+?>
+<?php if ($allMessages->count()): ?>
+    <div class="messages-list">
+        <?php /** @var \Sashakh\Chat\Model\Chat $chat */
+        foreach ($allMessages as $mess):
+            ?>
+            <p><?= __('%1, %2, %3', $mess->getCreatedAt(), $mess->getAuthorName(), $mess->getMessage()) ?></p>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
