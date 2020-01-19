@@ -2,10 +2,11 @@
 declare(strict_types=1);
 namespace Sashakh\Chat\Controller\Message;
 
+use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json as JsonResult;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\Data\Form\FormKey\Validator;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\DB\Transaction;
 use Sashakh\Chat\Model\Chat;
 use Sashakh\Chat\Model\ResourceModel\Chat\Collection as ChatCollection;
@@ -13,6 +14,11 @@ use Sashakh\Chat\Model\ResourceModel\Chat\Collection as ChatCollection;
 class Save extends \Magento\Framework\App\Action\Action implements
     \Magento\Framework\App\Action\HttpPostActionInterface
 {
+    /**
+     * @var \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+     */
+    private $formKeyValidator;
+
     /**
      * @var \Sashakh\Chat\Model\ChatFactory $chatFactory
      */
@@ -39,37 +45,38 @@ class Save extends \Magento\Framework\App\Action\Action implements
     private $customerSession;
 
     /**
-     * @var \Magento\Framework\Data\Form\FormKey\Validator
+    //* @var \Magento\Framework\Data\Form\FormKey\Validator
      */
-    private $formKeyValidator;
+   // private $formKeyValidator;
 
     /**
      * Save constructor.
+     * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      * @param \Sashakh\Chat\Model\ChatFactory $chatFactory
      * @param \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $chatCollectionFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
-     * @param  \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      */
 
     public function __construct(
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
         \Sashakh\Chat\Model\ChatFactory $chatFactory,
         \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $chatCollectionFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Customer\Model\Session $customerSession,
-        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
+        \Magento\Customer\Model\Session $customerSession
+
     ) {
         parent::__construct($context);
+        $this->formKeyValidator = $formKeyValidator;
         $this->chatFactory = $chatFactory;
         $this->chatCollectionFactory = $chatCollectionFactory;
         $this->transactionFactory = $transactionFactory;
         $this->storeManager = $storeManager;
         $this->customerSession = $customerSession;
-        $this->formKeyValidator = $formKeyValidator;
     }
 
     /**
@@ -87,6 +94,10 @@ class Save extends \Magento\Framework\App\Action\Action implements
 
         // Every fail should be controlled
         try {
+            if (!$this->formKeyValidator->validate($request) || $request->getParam('hideit')) {
+                throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
+            }
+
             $websiteId = (int) $this->storeManager->getWebsite()->getId();
 
             /** @var ChatCollection $chatCollection */
