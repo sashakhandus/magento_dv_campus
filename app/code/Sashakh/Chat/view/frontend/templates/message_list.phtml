@@ -4,9 +4,20 @@ $allMessages = $block->getAllMessages();
 <?php if ($allMessages->count()): ?>
     <div class="messages-list">
         <?php /** @var \Sashakh\Chat\Model\Chat $chat */
-        foreach ($allMessages as $mess):
+
+        foreach ($allMessages  as $mess):
             ?>
-            <p><?= __('%1, %2, %3', $mess->getCreatedAt(), $mess->getAuthorName(), $mess->getMessage()) ?></p>
+        <?php if ($mess->getAuthorType() === '1') {?>
+            <p class='user-question user-date'><?= __('%1', $mess->getCreatedAt()) ?></p>
+            <p class='user-question user-name'><?= __('%1', $mess->getAuthorName()) ?></p>
+            <p class='user-question user-message'><?= __('%1', $mess->getMessage()) ?></p>
+        <?php } elseif ($mess->getAuthorType() === '2') {?>
+            <p class='admin-question admin-date'><?= __('%1', $mess->getCreatedAt()) ?></p>
+            <p class='admin-question admin-name'><?= __('%1', $mess->getAuthorName()) ?></p>
+            <p class='admin-question admin-message'><?= __('%1', $mess->getMessage()) ?></p>
+
+        <?php }
+        ?>
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
