@@ -2,12 +2,13 @@
 declare(strict_types=1);
 namespace Sashakh\Chat\Controller\Message;
 
-use Sashakh\Chat\Model\Chat;
-use Sashakh\Chat\Model\ResourceModel\Chat\Collection as ChatCollection;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json as JsonResult;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Framework\DB\Transaction;
+use Sashakh\Chat\Model\Chat;
+use Sashakh\Chat\Model\ResourceModel\Chat\Collection as ChatCollection;
 
 class Save extends \Magento\Framework\App\Action\Action implements
     \Magento\Framework\App\Action\HttpPostActionInterface
@@ -33,12 +34,24 @@ class Save extends \Magento\Framework\App\Action\Action implements
     private $storeManager;
 
     /**
+     * @var \Magento\Customer\Model\Session $customerSession
+     */
+    private $customerSession;
+
+    /**
+     * @var \Magento\Framework\Data\Form\FormKey\Validator
+     */
+    private $formKeyValidator;
+
+    /**
      * Save constructor.
      * @param \Sashakh\Chat\Model\ChatFactory $chatFactory
      * @param \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $chatCollectionFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\Action\Context $context
+     * @param \Magento\Customer\Model\Session $customerSession
+     * @param  \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      */
 
     public function __construct(
@@ -46,13 +59,17 @@ class Save extends \Magento\Framework\App\Action\Action implements
         \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $chatCollectionFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Framework\App\Action\Context $context
+        \Magento\Framework\App\Action\Context $context,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
     ) {
         parent::__construct($context);
         $this->chatFactory = $chatFactory;
         $this->chatCollectionFactory = $chatCollectionFactory;
         $this->transactionFactory = $transactionFactory;
         $this->storeManager = $storeManager;
+        $this->customerSession = $customerSession;
+        $this->formKeyValidator = $formKeyValidator;
     }
 
     /**
@@ -81,9 +98,10 @@ class Save extends \Magento\Framework\App\Action\Action implements
             $chat = $this->chatFactory->create();
 
             $chat->setWebsiteId($websiteId)
-                ->setAuthorType($request->getParam('authorType'))
-                ->setAuthorName($request->getParam('authorName'))
-                ->setMessage($request->getParam('message'));
+                    ->setAuthorType($request->getParam('authorType'))
+                    ->setAuthorName($request->getParam('authorName'))
+                    ->setMessage($request->getParam('message'))
+                    ->setChatHash(bin2hex(random_bytes(10)));
             $transaction->addObject($chat);
 
             $transaction->save();

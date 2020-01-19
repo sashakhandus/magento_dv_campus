@@ -13,8 +13,11 @@
                    name="sashakh.chat.form"
                    template="Sashakh_Chat::form.phtml">
                 <block class="Sashakh\Chat\Block\Messages"
-                    name="message.list"
+                       name="message.list"
                        template="Sashakh_Chat::message_list.phtml">
+                    <arguments>
+                        <argument name="limit" xsi:type="number">10</argument>
+                    </arguments>
                 </block>
             </block>
         </referenceContainer>

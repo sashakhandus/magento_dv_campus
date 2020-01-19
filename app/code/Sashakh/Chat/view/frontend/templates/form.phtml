@@ -61,6 +61,7 @@
         </fieldset>
         <div class="actions-toolbar">
             <div class="primary">
+                <input name="form_key" type="hidden" value="<?= $block->getBlockHtml('formkey')?>"/>
                 <input type="hidden" name="hideit" id="hideit" value=""/>
                 <button type="submit" title="<?= $block->escapeHtmlAttr(__('Save')) ?>" class="action submit primary">
                     <span><?= $block->escapeHtml(__('Save')) ?></span>

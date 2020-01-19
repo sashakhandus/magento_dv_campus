@@ -15,6 +15,8 @@ use Magento\Framework\Exception\LocalizedException;
  * @method $this setMessage(string $message)
  * @method int getWebsiteId()
  * @method $this setWebsiteId(int $websiteId)
+ * @method $this getChatHash()
+ * @method $this setChatHash(int|string $cashHash)
  * @method int getCreatedAt()
  */
 
