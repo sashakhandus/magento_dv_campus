@@ -36,11 +36,11 @@ class Messages  extends \Magento\Framework\View\Element\Template
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
         $collection->getSelect();
-        /*$collection->setOrder('created_at', 'DESC');
+        $collection->setOrder('created_at', 'DESC');
 
         if ($limit = $this->getData('limit')) {
             $collection->setPageSize($limit);
-        }*/
+        }
 
         return $collection;
     }
