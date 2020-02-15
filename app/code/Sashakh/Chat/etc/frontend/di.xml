@@ -3,7 +3,14 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Sashakh\Chat\Controller\Message\Save">
         <arguments>
-            <argument name="customerSession" xsi:type="object">Magento\Chat\Model\Session\Proxy</argument>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="chat" xsi:type="string">Sashakh\Chat\CustomerData\Messages</item>
+            </argument>
         </arguments>
     </type>
 </config>

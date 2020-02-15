@@ -1,8 +1,9 @@
 define([
     'jquery',
+    'Magento_Customer/js/customer-data',
     'Magento_Ui/js/modal/alert',
     'Magento_Ui/js/modal/modal'
-], function ($, alert) {
+], function ($, customerData, alert) {
     'use strict';
 
     $.widget('sashakhChat.form', {
@@ -19,6 +20,11 @@ define([
             });
 
             $(this.element).on('submit.sashakh_chat', $.proxy(this.saveMessages, this));
+
+            console.log(customerData.get('chat')());
+            customerData.get('chat').subscribe(function (value) {
+                console.log(value);
+            });
         },
 
         _destroy: function () {

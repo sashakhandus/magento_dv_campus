@@ -19,7 +19,6 @@ services:
       # For Linux users only till docker.host.internal is not available by default
       # https://github.com/docker/libnetwork/pull/2348/files
       - "sasha-khandus.local www.sasha-khandus.local sasha-khandus-add.local www.sasha-khandus-add.local:127.0.0.1"
-      - "host.docker.internal:172.17.0.1"
     environment:
       # Must be set to some of the domains for xdebug to work. Should have server configured in
       # Preferences > Language and Frameworks > PHP > Servers

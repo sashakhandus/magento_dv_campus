@@ -26,4 +26,13 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         return $this->addFieldToFilter('website_id', $websiteId);
     }
+
+    /**
+     * @param int $customerId
+     * @return Collection
+     */
+    public function addCustomerFilter(int $customerId): self
+    {
+        return $this->addFieldToFilter('customer_id', $customerId);
+    }
 }
