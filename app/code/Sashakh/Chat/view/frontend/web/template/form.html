@@ -3,13 +3,14 @@
       id="sashakh-chat-form"
       method="post"
       onsubmit="return false;"
-      data-bind="submit: saveMessage"
+      data-bind="submit: saveMessages, afterRender: initModal"
 >
 <fieldset class="fieldset">
     <legend class="legend">
         <span translate="'Chat'"></span>
     </legend>
     <br/>
+    <div class="messages-list"></div>
     <?= $block->getChildHtml('message.list') ?>
     <br/>
     <div class="field name required">
@@ -18,7 +19,6 @@
         </label>
         <div class="control">
             <input data-bind="
-            value: inputValue,
             attr: {
             id: 'authorType',
             name: 'authorType',

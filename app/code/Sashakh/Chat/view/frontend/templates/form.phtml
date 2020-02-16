@@ -10,7 +10,7 @@
                 "components": {
                     "chatForm": {
                         "component": "sashakh_chat_form",
-                        "allMessages": <?= $block->getAllMessages() ?>
+                         "action": "<?= $block->escapeUrl($block->getUrl('sashakh_chat/message/save')) ?>"
                     }
                 }
             }
