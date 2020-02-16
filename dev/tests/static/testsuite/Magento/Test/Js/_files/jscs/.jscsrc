@@ -117,6 +117,7 @@
         "requireParamTypes": true
     },
   "excludeFiles": [
-    "../../../../../../../../../app/code/Sashakh/Chat/view/frontend/web/js/form.js"
+    "../../../../../../../../../app/code/Sashakh/Chat/view/frontend/web/js/form.js",
+    "../../../../../../../../../app/code/Sashakh/Chat/view/frontend/web/js/view/form.js"
   ]
 }

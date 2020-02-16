@@ -1,72 +1,19 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
-<div style="display: none;">
-    <form class="form"
-          action="javascript:void(0);"
-          id="sashakh-chat-form"
-          method="post"
-          data-mage-init='{"sashakh_chat_form":{
-            "action": "<?= $block->escapeUrl($block->getUrl('sashakh_chat/message/save')) ?>"
-          }}'
-          onsubmit="return false;"
-    >
-        <fieldset class="fieldset">
-            <legend class="legend">
-                <span><?= $block->escapeHtml(__('Chat')) ?></span>
-            </legend>
-            <br/>
-            <?= $block->getChildHtml('message.list') ?>
-            <br/>
-            <div class="field name required">
-                <label class="label" for="authorType">
-                    <span><?= $block->escapeHtml(__('Author type: 1 - user, 2 - admin.')) ?></span>
-                </label>
-                <div class="control">
-                    <input name="authorType"
-                           id="authorType"
-                           title="<?= $block->escapeHtmlAttr(__('Author type:')) ?>"
-                           class="input-text" type="number"
-                           data-validate="{required:true}"
-                    />
-                </div>
-            </div>
-            <div class="field name required">
-                <label class="label" for="authorName">
-                    <span><?= $block->escapeHtml(__('Author Name')) ?></span>
-                </label>
-                <div class="control">
-                    <input name="authorName"
-                           id="authorName"
-                           title="<?= $block->escapeHtmlAttr(__('Author Name')) ?>"
-                           class="input-text" type="text"
-                           data-validate="{required:true}"
-                    />
-                </div>
-            </div>
-            <div class="field note no-label">
-                <?= $block->escapeHtml(__('Your messages')) ?>
-            </div>
-            <div class="field message required">
-                <label class="label" for="textarea">
-                    <span><?= $block->escapeHtml(__('Enter message')) ?></span>
-                </label>
-                <div class="control">
-                    <textarea name="message"
-                           id="textarea"
-                           title="<?= $block->escapeHtmlAttr(__('')) ?>"
-                           class="textarea" type="text"
-                           data-validate="{required:true}"
-                    ></textarea>
-                </div>
-            </div>
-        </fieldset>
-        <div class="actions-toolbar">
-            <div class="primary">
-                <!--<input name="form_key" type="hidden" id="formkey" value="<?= $block->getBlockHtml('formkey')?>"/>-->
-                <input type="hidden" name="hideit" id="hideit" value=""/>
-                <button type="submit" title="<?= $block->escapeHtmlAttr(__('Save')) ?>" class="action submit primary">
-                    <span><?= $block->escapeHtml(__('Save')) ?></span>
-                </button>
-            </div>
-        </div>
-    </form>
+<div data-bind="scope: 'chatForm'" style="width: 50%; margin: 0 auto;">
+    <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "chatForm": {
+                        "component": "sashakh_chat_form",
+                        "allMessages": <?= $block->getAllMessages() ?>
+                    }
+                }
+            }
+        }
+    }
+</script>

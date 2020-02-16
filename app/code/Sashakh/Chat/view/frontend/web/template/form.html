@@ -1,0 +1,86 @@
+<form class="form"
+      action="javascript:void(0);"
+      id="sashakh-chat-form"
+      method="post"
+      onsubmit="return false;"
+      data-bind="submit: saveMessage"
+>
+<fieldset class="fieldset">
+    <legend class="legend">
+        <span translate="'Chat'"></span>
+    </legend>
+    <br/>
+    <?= $block->getChildHtml('message.list') ?>
+    <br/>
+    <div class="field name required">
+        <label class="label" data-bind="attr: {for: 'authorType'}">
+            <span data-bind="i18n: 'Author type: 1 - user, 2 - admin.'"></span>
+        </label>
+        <div class="control">
+            <input data-bind="
+            value: inputValue,
+            attr: {
+            id: 'authorType',
+            name: 'authorType',
+            title: 'authorType',
+            placeholder: 'authorType'
+            }
+           "
+                   class="input-text"
+                   type="number"
+                   data-validate="{required:true}"
+            />
+        </div>
+    </div>
+    <div class="field name required">
+        <label class="label" data-bind="attr: {for: 'authorName'}">
+            <span translate="'Author Name'"></span>
+        </label>
+        <div class="control">
+            <input data-bind="
+            attr: {
+            id: 'authorName',
+            name: 'authorName',
+            title: 'authorName',
+            placeholder: 'authorName'
+            }
+           "
+                   class="input-text"
+                   type="text"
+                   data-validate="{required:true}"
+            />
+        </div>
+    </div>
+    <div class="field note no-label" data-bind="i18n: 'Your messages'"></div>
+    <div class="field message required">
+        <label class="label" data-bind="attr: {for: 'textarea'}">
+            <span translate="'Enter message'"></span>
+        </label>
+        <div class="control">
+                    <textarea data-bind="
+            attr: {
+            id: 'textarea',
+            name: 'message',
+            title: 'message',
+            placeholder: 'authorName'
+            }
+           "
+                              class="textarea"
+                              type="text"
+                              data-validate="{required:true}"
+                    ></textarea>
+        </div>
+    </div>
+</fieldset>
+<div class="actions-toolbar">
+    <div class="primary">
+        <!--<input name="form_key" type="hidden" id="formkey" value="<?= $block->getBlockHtml('formkey')?>"/>-->
+        <input type="hidden" name="hideit" id="hideit" value=""/>
+        <button type="submit" class="action submit primary"
+                data-bind="attr: { title: $t('Save') }"
+        >
+            <span translate="'Save'"></span>
+        </button>
+    </div>
+</div>
+</form>

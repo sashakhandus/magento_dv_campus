@@ -1,10 +1,33 @@
 define([
     'jquery',
+    'ko',
+    'uiComponent',
     'Magento_Customer/js/customer-data',
     'Magento_Ui/js/modal/alert',
     'Magento_Ui/js/modal/modal'
-], function ($, customerData, alert) {
+], function ($, ko, Component, customerData, alert) {
     'use strict';
+
+    return Component.extend({
+        defaults: {
+            template: 'Sashakh_Chat/form'
+        },
+
+        inputValue: ko.observable(),
+
+        initObservable: function () {
+            this._super();
+            this.inputValue.subscribe(function (newValue) {
+                console.log(newValue);
+            });
+
+            return this;
+        },
+
+        saveMessage: function () {
+            console.log('Saved');
+        }
+    });
 
     $.widget('sashakhChat.form', {
         options: {
