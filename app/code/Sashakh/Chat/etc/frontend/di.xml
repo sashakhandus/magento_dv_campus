@@ -9,7 +9,7 @@
     <type name="Magento\Customer\CustomerData\SectionPoolInterface">
         <arguments>
             <argument name="sectionSourceMap" xsi:type="array">
-                <item name="chat" xsi:type="string">Sashakh\Chat\CustomerData\Messages</item>
+                <item name="chat" xsi:type="string">Sashakh\Chat\CustomerData\Chat</item>
             </argument>
         </arguments>
     </type>

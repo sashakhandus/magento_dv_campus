@@ -123,11 +123,11 @@ class Save extends \Magento\Framework\App\Action\Action implements
                     ->setAuthorName($request->getParam('authorName'))
                     ->setMessage($request->getParam('message'))
                     ->setChatHash($this->customerSession->getCustomerId());
-                $transaction->addObject($chat);
+                $transaction->addObject($chat->getData());
 
                 $transaction->save();
 
-                $this->customerSession->setCustomerMessage($infoAboutMessage);
+                $this->customerSession->setChat($infoAboutMessage);
 
                 $message = __('Saved!');
             } else {
@@ -153,14 +153,19 @@ class Save extends \Magento\Framework\App\Action\Action implements
 
                 $transaction->save();
 
-                $this->customerSession->setCustomerMessage($infoAboutMessage);
+                $infoAboutMessageAll = array_merge(
+                    $this->customerSession->getData('chat') ?? [],
+                    $infoAboutMessage
+                );
+
+                $this->customerSession->setChat($infoAboutMessageAll);
 
                 $message = __('Saved!  Please, log in to save them messages.');
             }
         } catch (LocalizedException $e) {
             $message = $e->getMessage();
         } catch (\Exception $e) {
-            $message = __('Your preferences can\'t be saved. Please, contact us if ypu see this message.');
+            $message = __('Your preferences can\'t be saved. Please, contact us if you see this message.');
         }
 
         /** @var JsonResult $response */

@@ -21,6 +21,7 @@ define([
 
             $(this.element).on('submit.sashakh_chat', $.proxy(this.saveMessages, this));
 
+
             console.log(customerData.get('chat')());
             customerData.get('chat').subscribe(function (value) {
                 console.log(value);

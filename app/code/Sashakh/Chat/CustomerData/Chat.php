@@ -45,19 +45,18 @@ class Messages implements \Magento\Customer\CustomerData\SectionSourceInterface
 
     public function getSectionData(): array
     {
-        /*if ($this->customerSession->isLoggedIn()) {
-            $data = [];*/
-        /** @var ChatCollection $chatCollection */
-        /* $chatCollection = $this->chatCollectionFactory->create();
-         $chatCollection->addCustomerFilter((int) $this->customerSession->getId())
+
+        if ($this->customerSession->isLoggedIn()) {
+            $data = [];
+            /** @var ChatCollection $chatCollection */
+            $chatCollection = $this->chatCollectionFactory->create();
+            $chatCollection->addCustomerFilter((int) $this->customerSession->getId())
         ->addWebsiteFilter((int) $this->storeManager->getWebsite()->getId());
+
+        //$data = $this->customerSession->getData('customer_messages') ?? [];
         } else {
-         $data = $this->customerSession->getData('customer_messages') ?? [];
-        }*/
-
-        //$data = ['test1', 'test2'];
-
-        $data = $this->customerSession->getData('customer_message') ?? [];
+            $data = $this->customerSession->getData('chat') ?? [];
+        }
 
         return $data;
     }
