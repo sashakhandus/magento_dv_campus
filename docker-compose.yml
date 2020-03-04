@@ -23,7 +23,7 @@ services:
         - MEMCACHED=0
     restart: always
     labels:
-      # - traefik.enable=false
+      - traefik.enable=true
       - traefik.http.frontend.rule=Host:sasha-khandus.local,www.sasha-khandus.local,sasha-khandus-add.local,www.sasha-khandus-add.local
       - traefik.http.frontend.entryPoints=http
       - traefik.https.frontend.rule=Host:sasha-khandus.local,www.sasha-khandus.local,sasha-khandus-add.local,www.sasha-khandus-add.local
@@ -33,10 +33,10 @@ services:
     # Must add extra_hosts to be written to /etc/hosts - otherwise containerized application can not curl itself
     extra_hosts:
       - "sasha-khandus.local www.sasha-khandus.local sasha-khandus-add.local www.sasha-khandus-add.local:127.0.0.1"
-#    links:
-#      - memcached
     links:
+#      - memcached
       - redis
+#      - elasticsearch
     external_links:
       - mysql57:mysql
 #    networks:
@@ -57,7 +57,25 @@ services:
 #  memcached:
 #    image: 'memcached:1.5'
 #    network_mode: bridge
+#    labels:
+#      - traefik.enable=false
 #    restart: always
+
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.6
+#    environment:
+#      http.host: 0.0.0.0
+#      transport.host: localhost
+#      network.host: 0.0.0.0
+#      xpack.security.enabled: "false"
+#      indices.query.bool.max_clause_count: 10240
+#      ES_JAVA_OPTS: -Xms512m -Xmx512m
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    restart: always
+#    network_mode: bridge
 
 #networks:
 #  reverse-proxy:
