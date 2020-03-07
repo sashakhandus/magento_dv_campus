@@ -88,7 +88,6 @@ class Save extends \Magento\Framework\App\Action\Action implements
     {
         $request = $this->getRequest();
 
-        // Every fail should be controlled
         try {
             if (!$this->formKeyValidator->validate($request)) {
                 throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
@@ -127,8 +126,7 @@ class Save extends \Magento\Framework\App\Action\Action implements
 
                 $message = __('Saved!');
             } else {
-                // @TODO: implement security layer when we get back to JS
-                // @TODO: save data to customer session for guests
+
                 /** @var Transaction $transaction */
                 $transaction = $this->transactionFactory->create();
 

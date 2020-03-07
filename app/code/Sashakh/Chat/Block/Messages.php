@@ -1,8 +1,7 @@
 <?php
-
+declare(strict_types=1);
 namespace Sashakh\Chat\Block;
 
-use Magento\Framework\Event\ManagerInterface as EventManager;
 use Sashakh\Chat\Model\ResourceModel\Chat\Collection;
 
 class Messages extends \Magento\Framework\View\Element\Template
@@ -18,11 +17,6 @@ class Messages extends \Magento\Framework\View\Element\Template
     private $collectionFactory;
 
     /**
-     * @var EventManager
-     */
-    private $eventManager;
-
-    /**
      * Requests constructor.
      * @param \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $collectionFactory
      * @param \Magento\Framework\View\Element\Template\Context $context
@@ -33,7 +27,6 @@ class Messages extends \Magento\Framework\View\Element\Template
         \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $collectionFactory,
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Customer\Model\Session $customerSession,
-        \Magento\Framework\Event\ManagerInterface $eventManager,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -41,6 +34,9 @@ class Messages extends \Magento\Framework\View\Element\Template
         $this->customerSession = $customerSession;
     }
 
+    /**
+     * @return \Magento\Customer\Model\Session
+     */
     public function getCustomerSession()
     {
         return $this->customerSession;
@@ -51,13 +47,19 @@ class Messages extends \Magento\Framework\View\Element\Template
      */
     public function getAllMessages(): Collection
     {
-        //$this->eventManager->dispatch('customer_login', ['chat_hash' => $this->getCustomerSession()->getCustomerMessage()['chat_hash']]);
-
-        /** @var Collection $collection */
-        $collection = $this->collectionFactory->create();
-        $collection->getSelect();
-        $collection->addFieldToFilter('chat_hash', ['eq' => $this->getCustomerSession()->getCustomerMessage()['chat_hash']]);
-        $collection->setOrder('created_at', 'DESC');
+        if ($this->getCustomerSession()->getCustomer()->getId()) {
+            /** @var Collection $collection */
+            $collection = $this->collectionFactory->create();
+            $collection->getSelect();
+            $collection->addFieldToFilter('chat_hash', ['eq' => $this->getCustomerSession()->getCustomer()->getId()]);
+            $collection->setOrder('created_at', 'DESC');
+        } else {
+            /** @var Collection $collection */
+            $collection = $this->collectionFactory->create();
+            $collection->getSelect();
+            $collection->addFieldToFilter('chat_hash', ['eq' => $this->getCustomerSession()->getCustomerMessage()['chat_hash']]);
+            $collection->setOrder('created_at', 'DESC');
+        }
 
         if ($limit = $this->getData('limit')) {
             $collection->setPageSize($limit);
