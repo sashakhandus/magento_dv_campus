@@ -6,42 +6,20 @@ namespace Sashakh\Chat\Model;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * @method int getMessageId()
- * @method int getAuthorType()
+ * method int getAuthorType()
  * @method $this setAuthorType(int $authorType)
- * @method string getAuthorName()
  * @method $this setAuthorName(string $authorName)
  * @method string getMessage()
  * @method $this setMessage(string $message)
- * @method int getWebsiteId()
+ * method int getWebsiteId()
  * @method $this setWebsiteId(int $websiteId)
- * @method $this getChatHash()
+ * @method string getChatHash()
  * @method $this setChatHash(int|string $chatHash)
- * @method int getCreatedAt()
+ * @method string getCreatedAt()
  */
 
 class Chat extends \Magento\Framework\Model\AbstractModel
 {
-
-    /**
-     * Chat constructor.
-     * @param \Magento\Framework\Model\Context $context
-     * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
-     * @param array $data
-     */
-
-    public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
-        array $data = []
-    ) {
-        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
-    }
-
     /**
      * @inheritDoc
      */
@@ -80,5 +58,21 @@ class Chat extends \Magento\Framework\Model\AbstractModel
         if (!$this->getWebsiteId()) {
             throw new LocalizedException(__('Can\'t save message: %s is not set.', 'website_id'));
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getMessageId(): int
+    {
+        return (int) $this->getData('message_id');
+    }
+
+    /**
+     * @return int
+     */
+    public function getAuthorType(): int
+    {
+        return (int) $this->getData('author_type');
     }
 }

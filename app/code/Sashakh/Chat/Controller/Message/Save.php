@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Sashakh\Chat\Controller\Message;
 
-//use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\Result\Json as JsonResult;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\DB\Transaction;
@@ -89,19 +88,15 @@ class Save extends \Magento\Framework\App\Action\Action implements
     {
         $request = $this->getRequest();
 
-        // Every fail should be controlled
         try {
             if (!$this->formKeyValidator->validate($request)) {
                 throw new LocalizedException(__('Something went wrong. Probably you were away for quite a long time already. Please, reload the page and try again.'));
             }
 
-            $customerId = (int) $this->customerSession->getId();
+            $customerId = (int)$this->customerSession->getId();
             $websiteId = (int)$this->storeManager->getWebsite()->getId();
 
-            $infoAboutMessage = [];
-            $infoAboutMessage['authorType'] = $request->getParam('authorType');
-            $infoAboutMessage['authorName'] = $request->getParam('authorName');
-            $infoAboutMessage['message'] = $request->getParam('message');
+            $chatHash = $this->customerSession->getCustomerMessage()['chat_hash'] ?? bin2hex(random_bytes(10));
 
             if ($customerId) {
 
@@ -127,12 +122,11 @@ class Save extends \Magento\Framework\App\Action\Action implements
 
                 $transaction->save();
 
-                $this->customerSession->setCustomerMessage($infoAboutMessage);
+                $this->customerSession->setCustomerMessage($chat->getData());
 
                 $message = __('Saved!');
             } else {
-                // @TODO: implement security layer when we get back to JS
-                // @TODO: save data to customer session for guests
+
                 /** @var Transaction $transaction */
                 $transaction = $this->transactionFactory->create();
 
@@ -148,12 +142,12 @@ class Save extends \Magento\Framework\App\Action\Action implements
                     ->setAuthorType($request->getParam('authorType'))
                     ->setAuthorName($request->getParam('authorName'))
                     ->setMessage($request->getParam('message'))
-                    ->setChatHash(bin2hex(random_bytes(10)));
+                    ->setChatHash($chatHash);
                 $transaction->addObject($chat);
 
                 $transaction->save();
 
-                $this->customerSession->setCustomerMessage($infoAboutMessage);
+                $this->customerSession->setCustomerMessage($chat->getData());
 
                 $message = __('Saved!  Please, log in to save them messages.');
             }
