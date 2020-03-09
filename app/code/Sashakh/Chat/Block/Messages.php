@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace Sashakh\Chat\Block;
 
 use Sashakh\Chat\Model\ResourceModel\Chat\Collection;

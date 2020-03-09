@@ -48,6 +48,8 @@ define([
             return $(this.element).validation().valid();
         },
 
+
+
         /**
          *
          * @param authorType
@@ -72,7 +74,6 @@ define([
 
                 $('.messages-list').append(adminDate, adminName, adminMessage).show();
             }
-
         },
 
         /**
@@ -102,6 +103,8 @@ define([
                 success: function (response) {
                     $('body').trigger('processStop');
 
+                    debugger;
+
                     this.appendMessage(formData.get('authorType'), formData.get('authorName'), formData.get('message'));
 
                     $("#sashakh-chat-form")[0].reset();
@@ -117,7 +120,6 @@ define([
                     $('body').trigger('processStop');
                     alert({
                         title: $.mage.__('Error'),
-                        /*eslint max-len: ["error", { "ignoreStrings": true }]*/
                         content: $.mage.__('Your preferences can\'t be saved. Please, contact us if you see this message.')
                     });
                 },
