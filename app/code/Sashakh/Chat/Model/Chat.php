@@ -16,6 +16,8 @@ use Magento\Framework\Exception\LocalizedException;
  * @method string getChatHash()
  * @method $this setChatHash(int|string $chatHash)
  * @method string getCreatedAt()
+ * @method $this setCustomerId(int $customerId)
+ * method int getCustomerId()
  */
 
 class Chat extends \Magento\Framework\Model\AbstractModel
@@ -74,5 +76,13 @@ class Chat extends \Magento\Framework\Model\AbstractModel
     public function getAuthorType(): int
     {
         return (int) $this->getData('author_type');
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerId(): int
+    {
+        return (int) $this->getData('customer_id');
     }
 }

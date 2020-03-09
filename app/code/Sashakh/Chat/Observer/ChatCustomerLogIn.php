@@ -66,7 +66,7 @@ class ChatCustomerLogIn implements \Magento\Framework\Event\ObserverInterface
         foreach ($collection as $item) {
             /** @var Transaction $transaction */
             $transaction = $this->transactionFactory->create();
-            $item->setData('chat_hash', $customerId);
+            $item->setData('customer_id', $customerId);
             $transaction->addObject($item);
             $transaction->save();
         }

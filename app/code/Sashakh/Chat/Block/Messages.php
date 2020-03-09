@@ -51,7 +51,7 @@ class Messages extends \Magento\Framework\View\Element\Template
             /** @var Collection $collection */
             $collection = $this->collectionFactory->create();
             $collection->getSelect();
-            $collection->addFieldToFilter('chat_hash', ['eq' => $this->getCustomerSession()->getCustomer()->getId()]);
+            $collection->addFieldToFilter('chat_hash', ['eq' => $this->getCustomerSession()->getCustomerMessage()['chat_hash']]);
             $collection->setOrder('created_at', 'DESC');
         } else {
             /** @var Collection $collection */

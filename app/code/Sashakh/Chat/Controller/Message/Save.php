@@ -117,7 +117,8 @@ class Save extends \Magento\Framework\App\Action\Action implements
                     ->setAuthorType($request->getParam('authorType'))
                     ->setAuthorName($request->getParam('authorName'))
                     ->setMessage($request->getParam('message'))
-                    ->setChatHash($this->customerSession->getCustomerId());
+                    ->setChatHash($chatHash)
+                    ->setCustomerId($customerId);
                 $transaction->addObject($chat);
 
                 $transaction->save();
@@ -143,6 +144,7 @@ class Save extends \Magento\Framework\App\Action\Action implements
                     ->setAuthorName($request->getParam('authorName'))
                     ->setMessage($request->getParam('message'))
                     ->setChatHash($chatHash);
+                //->setCustomerId('null');
                 $transaction->addObject($chat);
 
                 $transaction->save();

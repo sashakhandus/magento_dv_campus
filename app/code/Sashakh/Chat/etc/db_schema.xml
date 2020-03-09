@@ -23,6 +23,9 @@
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Creation Time"
         />
+        <column xsi:type="smallint" name="customer_id" padding="10" nullable="true"
+                comment="Customer_id"
+        />
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="message_id"/>
         </constraint>
