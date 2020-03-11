@@ -1,0 +1,19 @@
+<?php /** @var \Sashakh\Chat\Block\Messages $block */ ?>
+<div data-bind="scope: 'chatMessages'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "chatMessages": {
+                        "component": "sashakh_chat_messages",
+                         "allMessages": "<?= $block->getAllMessagesJson() ?>
+                    }
+                }
+            }
+        }
+    }
+</script>

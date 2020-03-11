@@ -1,0 +1,21 @@
+<?php /** @var \Sashakh\Chat\Block\Messages $block */
+$messagesCollection = $block->getAllMessages();
+$messages = array_reverse($messagesCollection->getItems());
+?>
+<?php if (count($messages)): ?>
+<div class="messages-list">
+    <?php /** @var \Sashakh\Chat\Model\Chat $message */
+            foreach ($messages as $message):
+        ?>
+    <?php if ($message->getAuthorType() === 1) : ?>
+    <p class='user-question user-date'><?= __('%1', $message->getCreatedAt()) ?></p>
+    <p class='user-question user-name'><?= __('%1', $message->getAuthorName()) ?></p>
+    <p class='user-question user-message'><?= __('%1', $message->getMessage()) ?></p>
+    <?php else : ?>
+    <p class='admin-question admin-date'><?= __('%1', $message->getCreatedAt()) ?></p>
+    <p class='admin-question admin-name'><?= __('%1', $message->getAuthorName()) ?></p>
+    <p class='admin-question admin-message'><?= __('%1', $message->getMessage()) ?></p>
+    <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>
