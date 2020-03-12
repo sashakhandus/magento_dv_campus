@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Sashakh\Chat\Model\ResourceModel\Chat;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
-
     /**
      * @inheritDoc
      */

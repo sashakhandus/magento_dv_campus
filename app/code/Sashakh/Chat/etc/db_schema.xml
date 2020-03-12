@@ -8,6 +8,9 @@
         <column xsi:type="smallint" name="author_type" padding="5" unsigned="true" nullable="false"
                 comment="Author Type"
         />
+        <column xsi:type="smallint" name="author_id" padding="10" nullable="false"
+                comment="Author Id"
+        />
         <column xsi:type="varchar" name="author_name" length="20" nullable="false"
                 comment="Author Name"
         />

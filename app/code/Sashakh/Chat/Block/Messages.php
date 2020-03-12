@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Sashakh\Chat\Block;
 
 use Sashakh\Chat\Model\ResourceModel\Chat\Collection;
@@ -7,12 +9,12 @@ use Sashakh\Chat\Model\ResourceModel\Chat\Collection;
 class Messages extends \Magento\Framework\View\Element\Template
 {
     /**
-     * @var \Magento\Customer\Model\Session
+     * @var \Magento\Customer\Model\Session $customerSession
      */
     private $customerSession;
 
     /**
-     * @var \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory
+     * @var \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $collectionFactory
      */
     private $collectionFactory;
 
@@ -35,31 +37,14 @@ class Messages extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * @return \Magento\Customer\Model\Session
-     */
-    public function getCustomerSession()
-    {
-        return $this->customerSession;
-    }
-
-    /**
      * @return Collection
      */
     public function getAllMessages(): Collection
     {
-        if ($this->getCustomerSession()->getCustomer()->getId()) {
-            /** @var Collection $collection */
-            $collection = $this->collectionFactory->create();
-            $collection->getSelect();
-            $collection->addFieldToFilter('chat_hash', ['eq' => $this->getCustomerSession()->getCustomer()->getId()]);
-            $collection->setOrder('created_at', 'DESC');
-        } else {
-            /** @var Collection $collection */
-            $collection = $this->collectionFactory->create();
-            $collection->getSelect();
-            $collection->addFieldToFilter('chat_hash', ['eq' => $this->getCustomerSession()->getCustomerMessage()['chat_hash']]);
-            $collection->setOrder('created_at', 'DESC');
-        }
+        /** @var Collection $collection */
+        $collection = $this->collectionFactory->create();
+        $collection->addFieldToFilter('chat_hash', $this->customerSession->getChatHash());
+        $collection->setOrder('created_at', 'DESC');
 
         if ($limit = $this->getData('limit')) {
             $collection->setPageSize($limit);
