@@ -19,14 +19,21 @@ class Messages extends \Magento\Framework\View\Element\Template
     private $collectionFactory;
 
     /**
+     * @var \Magento\Framework\Serialize\Serializer\Json
+     */
+    private $jsonSerializer;
+
+    /**
      * Requests constructor.
      * @param \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $collectionFactory
+     * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param array $data
      */
     public function __construct(
         \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $collectionFactory,
+        \Magento\Framework\Serialize\Serializer\Json $jsonSerializer,
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Customer\Model\Session $customerSession,
         array $data = []
@@ -34,12 +41,21 @@ class Messages extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
         $this->collectionFactory = $collectionFactory;
         $this->customerSession = $customerSession;
+        $this->jsonSerializer = $jsonSerializer;
     }
 
     /**
-     * @return Collection
+     * @return \Magento\Customer\Model\Session
      */
-    public function getAllMessages(): Collection
+    public function getCustomerSession()
+    {
+        return $this->customerSession;
+    }
+
+    /**
+     * @return String
+     */
+    public function getAllMessagesJson(): string
     {
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
@@ -50,6 +66,20 @@ class Messages extends \Magento\Framework\View\Element\Template
             $collection->setPageSize($limit);
         }
 
-        return $collection;
+        $messages = [];
+
+        /** @var Messages $messages */
+        if ($collection) {
+            foreach ($collection as $item) {
+                $messages[] = [
+                    'author_type' => $item->getAuthorType(),
+                    'author_name' => $item->getAuthorName(),
+                    'message' => $item->getMessage(),
+                    'created_at' => $item->getCreatedAt()
+                ];
+            }
+        }
+
+        return $this->jsonSerializer->serialize($messages);
     }
 }

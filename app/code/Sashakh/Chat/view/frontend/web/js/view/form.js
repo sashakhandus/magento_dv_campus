@@ -11,13 +11,14 @@ define([
     return Component.extend({
         defaults: {
             template: 'Sashakh_Chat/form',
-            customerMessage: customerData.get('customer_message'),
-            action: '',
-           // allMessages: []
+            //customerMessage: customerData.get('customer_message'),
+            action: ''
         },
+       allMessages: {},
 
         /** @inheritDoc */
-        initialize: function() {
+        initObzervable: function() {
+            var customerMessage = customerData.get('customer_message')();
             this._super();
 
             $(document).on(

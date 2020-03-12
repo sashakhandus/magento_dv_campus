@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sashakh\Chat\CustomerData;
 
 use Sashakh\Chat\Model\Chat;
+
 use Sashakh\Chat\Model\ResourceModel\Chat\Collection as ChatCollection;
 
 class Messages implements \Magento\Customer\CustomerData\SectionSourceInterface
@@ -47,6 +48,7 @@ class Messages implements \Magento\Customer\CustomerData\SectionSourceInterface
 
     public function getSectionData(): array
     {
+
         /** @var ChatCollection $chatCollection */
         $chatCollection = $this->chatCollectionFactory->create();
         $chatCollection->addWebsiteFilter((int) $this->storeManager->getWebsite()->getId())
@@ -56,8 +58,19 @@ class Messages implements \Magento\Customer\CustomerData\SectionSourceInterface
         /** @var Chat $message */
         foreach ($chatCollection as $message) {
             $data[] = $message->getData();
-        }
 
-        return $data;
+            if ($this->customerSession->isLoggedIn()) {
+                /** @var ChatCollection $chatCollection */
+                $chatCollection = $this->chatCollectionFactory->create();
+                $chatCollection->addCustomerFilter((int) $this->customerSession->getId())
+                ->addWebsiteFilter((int) $this->storeManager->getWebsite()->getId());
+
+                $data = $chatCollection->getData()[0];
+            } else {
+                $data = $this->customerSession->getData('customer_message') ?? [];
+            }
+
+            return $data;
+        }
     }
 }
