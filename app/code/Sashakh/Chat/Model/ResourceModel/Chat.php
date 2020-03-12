@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Sashakh\Chat\Model\ResourceModel;
 
-class Chat  extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Chat extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**
      * @inheritDoc

@@ -3,6 +3,7 @@
         "column": {
             "message_id": true,
             "author_type": true,
+            "author_id": true,
             "author_name": true,
             "message": true,
             "website_id": true,

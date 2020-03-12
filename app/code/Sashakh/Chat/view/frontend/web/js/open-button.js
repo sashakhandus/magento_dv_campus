@@ -37,8 +37,7 @@ define([
          */
         openChat: function () {
             $(this.options.form).data('mage-modal').openModal();
-        },
-
+        }
     });
 
     return $.sashakhChat.openButton;

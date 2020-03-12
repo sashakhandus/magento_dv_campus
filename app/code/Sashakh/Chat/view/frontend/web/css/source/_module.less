@@ -45,15 +45,16 @@
   }
 
   .messages-list {
-    //display: none;
     background: #fff;
     background-clip: padding-box;
     border: 1px solid #c2c2c2;
     border-radius: 1px;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 0;
+    font-size: 14px;
     line-height: 1.428571429;
     padding: 5px 9px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     vertical-align: baseline;
     max-width: 100%;
     box-sizing: border-box;
@@ -62,6 +63,56 @@
     white-space: -o-pre-wrap;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    list-style: none;
+
+    .chat-message {
+      width: 60%;
+      font-size: 14px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -o-pre-wrap;
+      overflow-wrap: break-word;
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .chat-message.user {
+      text-align: right;
+      width: 60%;
+      background: @color-sky-blue1;
+      color: @color-gray19;
+      margin-left: auto;
+      margin-right: 0;
+      padding: 5px;
+      font-size: 14px;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -o-pre-wrap;
+      overflow-wrap: break-word;
+    }
+
+    .chat-message.admin {
+      text-align: left;
+      width: 60%;
+      background: @color-yellow-light2;
+      color: @color-gray19;
+      margin-right: auto;
+      margin-left: 0;
+      padding: 5px;
+      font-size: 14px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: -o-pre-wrap;
+      overflow-wrap: break-word;
+    }
 
     .user-question {
       text-align: right;
@@ -127,7 +178,6 @@
       margin-bottom: 10px;
     }
   }
-
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {

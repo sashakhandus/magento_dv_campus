@@ -1,22 +1,28 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Sashakh\Chat\Setup\Patch\Data;
+
 use Magento\Framework\Component\ComponentRegistrar;
-class InstallDemoData implements
-    \Magento\Framework\Setup\Patch\DataPatchInterface,
-    \Magento\Framework\Setup\Patch\PatchVersionInterface
+
+class InstallDemoData implements \Magento\Framework\Setup\Patch\DataPatchInterface
 {
     /**
      * @var \Magento\Framework\Setup\ModuleDataSetupInterface $moduleDataSetup
      */
     private $moduleDataSetup;
+
     /**
      * @var \Magento\Framework\File\Csv $csv
      */
     private $csv;
+
     /**
      * @var \Magento\Framework\Component\ComponentRegistrar $componentRegistrar
      */
     private $componentRegistrar;
+
     /**
      * UpgradeData constructor.
      * @param \Magento\Framework\Setup\ModuleDataSetupInterface $moduleDataSetup
@@ -32,6 +38,7 @@ class InstallDemoData implements
         $this->componentRegistrar = $componentRegistrar;
         $this->csv = $csv;
     }
+
     /**
      * @return void
      * @throws \Exception
@@ -43,12 +50,14 @@ class InstallDemoData implements
             . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'data.csv';
         $tableName = $this->moduleDataSetup->getTable('sashakh_chat');
         $csvData = $this->csv->getData($filePath);
+
         try {
             $connection->beginTransaction();
             $columns = [
                 'author_type',
                 'author_name',
                 'message',
+                'author_id'
             ];
             foreach ($csvData as $rowNumber => $data) {
                 $insertedData = array_combine($columns, $data);
@@ -71,18 +80,12 @@ class InstallDemoData implements
     {
         return [];
     }
+
     /**
      * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
         return [];
-    }
-    /**
-     * @inheritDoc
-     */
-    public static function getVersion()
-    {
-        return '1.0.1';
     }
 }

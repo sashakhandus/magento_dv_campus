@@ -21,9 +21,8 @@ define([
 
             $(this.element).on('submit.sashakh_chat', $.proxy(this.saveMessages, this));
 
-            console.log(customerData.get('chat')());
             customerData.get('chat').subscribe(function (value) {
-                console.log(value);
+                //console.log(value);
             });
         },
 
@@ -48,8 +47,6 @@ define([
             return $(this.element).validation().valid();
         },
 
-
-
         /**
          *
          * @param authorType
@@ -57,23 +54,20 @@ define([
          * @param message
          */
         appendMessage: function(authorType, authorName, message) {
-            var currentDate = new Date();
-            var dateTime = currentDate.toUTCString();
-            var userDate, userName, userMessage, adminDate, adminName, adminMessage;
+            var currentDate = new Date(),
+                dateTime = currentDate.toUTCString(),
+                date, name, messageHtml, authorTypeHtml, li;
 
-            if (authorType === '1') {
-                userDate = $("<p class='user-question user-date'></p>").text(dateTime);
-                userName = $("<p class='user-question user-name'></p>").text(authorName);
-                userMessage = $("<p class='user-question user-message'></p>").text(message);
+            authorTypeHtml = authorType === '1' ? 'user' : 'admin';
+            li = $("<li class='chat-message'></li>").addClass(authorTypeHtml);
 
-                $('.messages-list').append(userDate, userName, userMessage).show();
-            } else if (authorType === '2') {
-                adminDate = $("<p class='admin-question admin-date'></p>").text(dateTime);
-                adminName = $("<p class='admin-question admin-name'></p>").text(authorName);
-                adminMessage = $("<p class='admin-question admin-message'></p>").text(message);
+            date = $("<p class='message-date'></p>").text(dateTime);
+            name = $("<p class='message-name'></p>").text(authorName);
+            messageHtml = $("<p class='message-message'></p>").text(message);
 
-                $('.messages-list').append(adminDate, adminName, adminMessage).show();
-            }
+            li.append(date, name, messageHtml);
+
+            $('.messages-list').append(li).show();
         },
 
         /**
@@ -103,13 +97,11 @@ define([
                 success: function (response) {
                     $('body').trigger('processStop');
 
-                    debugger;
-
                     this.appendMessage(formData.get('authorType'), formData.get('authorName'), formData.get('message'));
 
-                    $("#sashakh-chat-form")[0].reset();
+                    $("#sashakh-chat-form").get(0).reset();
 
-                   alert({
+                    alert({
                         title: $.mage.__('Success'),
                         content: response.message
                     });

@@ -2,20 +2,15 @@
 $messagesCollection = $block->getAllMessages();
 $messages = array_reverse($messagesCollection->getItems());
 ?>
-<?php if (count($messages)): ?>
-    <div class="messages-list">
+    <ul class="messages-list">
         <?php /** @var \Sashakh\Chat\Model\Chat $message */
             foreach ($messages as $message):
+                $authorType = $message->getAuthorType() === 1 ? 'user' : 'admin';
         ?>
-            <?php if ($message->getAuthorType() === 1) : ?>
-                <p class='user-question user-date'><?= __('%1', $message->getCreatedAt()) ?></p>
-                <p class='user-question user-name'><?= __('%1', $message->getAuthorName()) ?></p>
-                <p class='user-question user-message'><?= __('%1', $message->getMessage()) ?></p>
-            <?php else : ?>
-                <p class='admin-question admin-date'><?= __('%1', $message->getCreatedAt()) ?></p>
-                <p class='admin-question admin-name'><?= __('%1', $message->getAuthorName()) ?></p>
-                <p class='admin-question admin-message'><?= __('%1', $message->getMessage()) ?></p>
-            <?php endif; ?>
+            <li class="chat-message <?= $block->escapeHtml($authorType) ?>">
+                <p class='message-date'><?= $block->escapeHtml($message->getCreatedAt()) ?></p>
+                <p class='message-name'><?= $block->escapeHtml($message->getAuthorName()) ?></p>
+                <p class='message-message'><?= $block->escapeHtml($message->getMessage()) ?></p>
+            </li>
         <?php endforeach; ?>
-    </div>
-<?php endif; ?>
+    </ul>
