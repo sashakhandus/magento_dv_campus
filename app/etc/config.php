@@ -243,6 +243,7 @@ return [
         'Klarna_Kp' => 1,
         'Magento_PaypalReCaptcha' => 1,
         'MSP_TwoFactorAuth' => 1,
+        'Mageside_SubscribeAtCheckout' => 1,
         'Sashakh_Catalog' => 1,
         'Sashakh_Chat' => 1,
         'Sashakh_Cms' => 1,
