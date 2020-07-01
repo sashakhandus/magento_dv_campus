@@ -1,8 +1,4 @@
 <?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
-<<<<<<< HEAD
-<div data-bind="scope: 'chatForm'" style="width: 50%; margin: 0 auto;">
-    <!-- ko template: getTemplate() --><!-- /ko -->
-=======
 <div style="display: none;">
     <form class="form"
           action="javascript:void(0);"
@@ -71,20 +67,4 @@
             </div>
         </div>
     </form>
->>>>>>> hw-20-session
 </div>
-
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Ui/js/core/app": {
-                "components": {
-                    "chatForm": {
-                        "component": "sashakh_chat_form",
-                         "action": "<?= $block->escapeUrl($block->getUrl('sashakh_chat/message/save')) ?>"
-                    }
-                }
-            }
-        }
-    }
-</script>
