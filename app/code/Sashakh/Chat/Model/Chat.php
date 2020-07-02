@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Sashakh\Chat\Model;
@@ -8,16 +9,16 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * method int getAuthorType()
  * @method $this setAuthorType(int $authorType)
+ * @method string getAuthorName()
  * @method $this setAuthorName(string $authorName)
  * @method string getMessage()
  * @method $this setMessage(string $message)
- * method int getWebsiteId()
+ * @method int getWebsiteId()
  * @method $this setWebsiteId(int $websiteId)
  * @method string getChatHash()
- * @method $this setChatHash(int|string $chatHash)
+ * @method $this setChatHash(string $chatHash)
  * @method string getCreatedAt()
- * @method $this setCustomerId(int $customerId)
- * method int getCustomerId()
+ * @method $this setAuthorId(int $authorId)
  */
 
 class Chat extends \Magento\Framework\Model\AbstractModel
@@ -81,8 +82,8 @@ class Chat extends \Magento\Framework\Model\AbstractModel
     /**
      * @return int
      */
-    public function getCustomerId(): int
+    public function getAuthorId(): int
     {
-        return (int) $this->getData('customer_id');
+        return (int) $this->getData('author_id');
     }
 }

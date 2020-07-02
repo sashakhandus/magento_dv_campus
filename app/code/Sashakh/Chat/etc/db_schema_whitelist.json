@@ -4,6 +4,7 @@
             "message_id": true,
             "author_type": true,
             "author_name": true,
+            "author_id": true,
             "message": true,
             "website_id": true,
             "chat_hash": true,
