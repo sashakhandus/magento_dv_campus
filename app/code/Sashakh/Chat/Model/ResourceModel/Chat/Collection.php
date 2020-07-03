@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Sashakh\Chat\Model\ResourceModel\Chat;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
-
     /**
      * @inheritDoc
      */
@@ -35,4 +35,5 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     {
         return $this->addFieldToFilter('customer_id', $customerId);
     }
+
 }
