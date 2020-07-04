@@ -3,72 +3,62 @@
       id="sashakh-chat-form"
       method="post"
       onsubmit="return false;"
-      data-bind="submit: saveMessages, afterRender: initModal"
+      data-bind="submit: saveMessage"
 >
 <fieldset class="fieldset">
     <legend class="legend">
-        <span translate="'Chat'"></span>
+        <span data-bind="i18n: 'Chat'"></span>
     </legend>
-    <br/>
     <div class="messages-list"></div>
-    <?= $block->getChildHtml('message.list') ?>
-    <br/>
     <div class="field name required">
-        <label class="label" data-bind="attr: {for: 'authorType'}">
+        <label class="label" data-bind="attr: { for: 'authorType'}">
             <span data-bind="i18n: 'Author type: 1 - user, 2 - admin.'"></span>
         </label>
         <div class="control">
             <input data-bind="
-            attr: {
-            id: 'authorType',
-            name: 'authorType',
-            title: 'authorType',
-            placeholder: 'authorType'
-            }
-           "
-                   class="input-text"
-                   type="number"
+                   value: inputAuthorType,
+                   attr: {
+                       title: $t('Author type:'),
+                       name: $t('Author type:'),
+                       id: $t('authorType:')
+                   }"
+                   class="input-text" type="number"
                    data-validate="{required:true}"
             />
         </div>
     </div>
     <div class="field name required">
-        <label class="label" data-bind="attr: {for: 'authorName'}">
-            <span translate="'Author Name'"></span>
+        <label class="label" data-bind="attr: { for: 'authorName'}">
+            <span data-bind="i18n: 'Author name'"></span>
         </label>
         <div class="control">
             <input data-bind="
-            attr: {
-            id: 'authorName',
-            name: 'authorName',
-            title: 'authorName',
-            placeholder: 'authorName'
-            }
-           "
-                   class="input-text"
-                   type="text"
+                   value: inputAuthorName,
+                   attr: {
+                       title: $t('Author name:'),
+                       name: $t('Author name:'),
+                       id: $t('authorName')
+                   }"
+                   class="input-text" type="text"
                    data-validate="{required:true}"
             />
         </div>
     </div>
-    <div class="field note no-label" data-bind="i18n: 'Your messages'"></div>
+    <div class="field note no-label" data-bind="i18n: 'Your messages'" ></div>
     <div class="field message required">
-        <label class="label" data-bind="attr: {for: 'textarea'}">
-            <span translate="'Enter message'"></span>
+        <label class="label"  data-bind="attr: { for: 'textarea'}">
+            <span data-bind="i18n: 'Enter message'"></span>
         </label>
         <div class="control">
-                    <textarea data-bind="
-            attr: {
-            id: 'textarea',
-            name: 'message',
-            title: 'message',
-            placeholder: 'authorName'
-            }
-           "
-                              class="textarea"
-                              type="text"
-                              data-validate="{required:true}"
-                    ></textarea>
+            <textarea data-bind="
+                      attr: {
+                            title: $t('message'),
+                            name: $t('message'),
+                            id: $t('textarea')
+                      }"
+                      class="textarea"
+                      data-validate="{required:true}"
+            ></textarea>
         </div>
     </div>
 </fieldset>
@@ -76,10 +66,8 @@
     <div class="primary">
         <!--<input name="form_key" type="hidden" id="formkey" value="<?= $block->getBlockHtml('formkey')?>"/>-->
         <input type="hidden" name="hideit" id="hideit" value=""/>
-        <button type="submit" class="action submit primary"
-                data-bind="attr: { title: $t('Save') }"
-        >
-            <span translate="'Save'"></span>
+        <button type="submit" data-bind="attr: { title: $t('Save')" class="action submit primary">
+            <span data-bind="i18n: 'Save'"></span>
         </button>
     </div>
 </div>

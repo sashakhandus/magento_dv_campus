@@ -1,19 +1,16 @@
-<?php /** @var \Sashakh\Chat\Block\Messages $block */ ?>
-<div data-bind="scope: 'chatMessages'">
-    <!-- ko template: getTemplate() --><!-- /ko -->
-</div>
-
-<script type="text/x-magento-init">
-    {
-        "*": {
-            "Magento_Ui/js/core/app": {
-                "components": {
-                    "chatMessages": {
-                        "component": "sashakh_chat_messages",
-                         "allMessages": "<?= $block->getAllMessagesJson() ?>
-                    }
-                }
-            }
-        }
-    }
-</script>
+<?php /** @var \Sashakh\Chat\Block\Messages $block */
+$messagesCollection = $block->getAllMessages();
+$messages = array_reverse($messagesCollection->getItems());
+?>
+<ul class="messages-list">
+    <?php /** @var \Sashakh\Chat\Model\Chat $message */
+    foreach ($messages as $message):
+        $authorType = $message->getAuthorType() === 1 ? 'user' : 'admin';
+        ?>
+        <li class="chat-message <?= $block->escapeHtml($authorType) ?>">
+            <p class='message-date'><?= $block->escapeHtml($message->getCreatedAt()) ?></p>
+            <p class='message-name'><?= $block->escapeHtml($message->getAuthorName()) ?></p>
+            <p class='message-message'><?= $block->escapeHtml($message->getMessage()) ?></p>
+        </li>
+    <?php endforeach; ?>
+</ul>
