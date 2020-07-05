@@ -19,14 +19,21 @@ class Messages extends \Magento\Framework\View\Element\Template
     private $collectionFactory;
 
     /**
+     * @var \Magento\Framework\Serialize\Serializer\Json
+     */
+    private $jsonSerializer;
+
+    /**
      * Requests constructor.
      * @param \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $collectionFactory
+     * @param \Magento\Framework\Serialize\Serializer\Json $jsonSerializer
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param array $data
      */
     public function __construct(
         \Sashakh\Chat\Model\ResourceModel\Chat\CollectionFactory $collectionFactory,
+        \Magento\Framework\Serialize\Serializer\Json $jsonSerializer,
         \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Customer\Model\Session $customerSession,
         array $data = []
@@ -34,12 +41,13 @@ class Messages extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
         $this->collectionFactory = $collectionFactory;
         $this->customerSession = $customerSession;
+        $this->jsonSerializer = $jsonSerializer;
     }
 
     /**
-     * @return Collection
+     * @return string
      */
-    public function getAllMessages(): Collection
+    public function getAllMessagesJson(): string
     {
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
@@ -50,6 +58,16 @@ class Messages extends \Magento\Framework\View\Element\Template
             $collection->setPageSize($limit);
         }
 
-        return $collection;
+        $messages = [];
+
+        /** @var  $message */
+        foreach ($collection as $message) {
+            $messages[] = [
+                'message_id' => $message->getMessageId(),
+                'author_type' => $message->getAuthorType()
+            ];
+        }
+
+        return $this->jsonSerializer->serialize($messages);
     }
 }

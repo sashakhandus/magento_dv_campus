@@ -1,4 +1,4 @@
-<?php /** @var \Magento\Framework\View\Element\Template $block */ ?>
+<?php /** @var \Sashakh\Chat\Block\Messages $block */ ?>
 <div data-bind="scope: 'chatForm'" style="width: 50%; margin: 0 auto">
     <!-- ko template: getTemplate() --><!-- /ko -->
 </div>
@@ -9,7 +9,9 @@
             "Magento_Ui/js/core/app": {
                 "components": {
                     "chatForm": {
-                        "component": "sashakh_chat_form"
+                        "component": "sashakh_chat_form",
+                        "messages": <?= $block->getAllMessagesJson() ?>,
+                        "action": "<?= $block->escapeUrl($block->getUrl('sashakh_chat/message/save')) ?>"
                     }
                 }
             }
